@@ -1,0 +1,37 @@
+# Conversation Archive – Health Insurance Lead Bot Project
+
+This file contains the full context of the discussion between user and assistant,
+summarizing requirements, design decisions, and deliverables.
+
+---
+
+Highlights:
+- User wants the **best lead finding bot in the world**, focused on health insurance.
+- Bot must handle ACA vs Private-Prime segmentation.
+- DNC compliance and suppression are mandatory.
+- Qualifier-first workflow: NEW → TRIAGE → QUALIFIED → READY → YOU → WON/LOST.
+- Only READY (appointment-confirmed) leads go to Principal.
+- Deliverables included: patch scripts, checklist, Postman, executive summary, training script, README, process flow diagram.
+
+Generated Deliverables:
+- patch-world-class.sh
+- patch-qualifier-pipeline.sh
+- checklist.md
+- postman.json
+- executive-summary.md
+- qualifier_loom_script.pdf
+- README.md
+- lead_pipeline_flow.png
+
+Bundle:
+- Final ZIP = handoff_bundle_FINAL_WITH_FLOW.zip
+- Contains all above deliverables.
+
+Notes:
+- Compliance with DNC and TCPA baked in.
+- Encryption at rest using Fernet.
+- Calendly booking workflow and optional HubSpot sync only for READY.
+- Postman collection tests all endpoints.
+- Qualifier Loom script PDF provides 2-minute training.
+
+End of archive.

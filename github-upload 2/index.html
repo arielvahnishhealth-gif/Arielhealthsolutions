@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="ArielHealthSolutions.com helps individuals, families, and self-employed professionals compare health insurance options with a free guided quote review."
+    />
+    <title>ArielHealthSolutions.com</title>
+    <link rel="canonical" href="https://arielhealthsolutions.com/" />
+    <link rel="stylesheet" href="/static/site.css" />
+  </head>
+  <body>
+    <header class="site-header" id="top">
+      <a class="brand" href="#top" aria-label="ArielHealthSolutions.com home">
+        <img class="brand-logo" src="/assets/ariel-vahnish-health-solutions-logo.png" alt="ArielHealthSolutions.com" />
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#services">Services</a>
+        <a href="#advisor">About</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <a class="nav-cta" href="#quote">Get My Quote</a>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-bg" aria-hidden="true"></div>
+        <div class="hero-inner">
+          <div class="hero-copy-block">
+            <div class="hero-badges" aria-label="Service highlights">
+              <span>Licensed guidance</span>
+              <span>4-step quote review</span>
+              <span>$0 consultation</span>
+            </div>
+            <p class="eyebrow">Licensed state health advisor</p>
+            <h1>Premium health coverage made personal.</h1>
+            <p class="hero-copy">
+              Compare private health plans, ACA marketplace options, family coverage, and self-employed solutions with help from ArielHealthSolutions.com.
+            </p>
+            <div class="hero-actions">
+              <a class="primary-link" href="#quote">Start My Quote</a>
+              <a class="secondary-link" href="#booking">Book Consultation</a>
+            </div>
+            <div class="hero-feature-grid" aria-label="Quick reasons to request a quote">
+              <article>
+                <strong>Free Service</strong>
+                <span>No cost to request a coverage review.</span>
+              </article>
+              <article>
+                <strong>Plan Comparison</strong>
+                <span>Review routes that may fit your doctors and budget.</span>
+              </article>
+              <article>
+                <strong>Personal Help</strong>
+                <span>Plain-English guidance before you choose.</span>
+              </article>
+            </div>
+          </div>
+
+          <form class="quote-form hero-form" id="quote" method="post" action="/api/quote" data-quote-form>
+            <div class="form-heading">
+              <span class="form-status" role="status" aria-live="polite" data-form-status>Free quote request</span>
+              <h2>Get matched with plan options</h2>
+              <p>Send the basics and Ariel's qualifier will help narrow your next step.</p>
+            </div>
+            <div class="field-grid">
+              <label>
+                Full name
+                <input name="name" autocomplete="name" placeholder="Enter your name" required />
+              </label>
+              <label>
+                Phone number
+                <input name="phone" autocomplete="tel" inputmode="tel" placeholder="(555) 123-4567" required />
+              </label>
+            </div>
+            <div class="field-grid">
+              <label>
+                Email address
+                <input name="email" type="email" autocomplete="email" placeholder="you@example.com" />
+              </label>
+              <label>
+                State
+                <input name="state" autocomplete="address-level1" maxlength="2" placeholder="FL" required />
+              </label>
+            </div>
+            <div class="field-grid">
+              <label>
+                Age
+                <input name="age" type="number" min="18" max="99" inputmode="numeric" placeholder="37" />
+              </label>
+              <label>
+                Household
+                <select name="household_size">
+                  <option value="1">Just me</option>
+                  <option value="2">Two people</option>
+                  <option value="3">Three people</option>
+                  <option value="4">Four people</option>
+                  <option value="5">Five or more</option>
+                </select>
+              </label>
+            </div>
+            <label>
+              Additional details
+              <textarea
+                name="intent"
+                rows="3"
+                required
+                placeholder="Coverage type, timing, doctors, budget, prescriptions, or best time to call..."
+              ></textarea>
+            </label>
+            <label class="consent-row">
+              <input type="checkbox" name="healthy" value="yes" />
+              <span>I am generally healthy</span>
+            </label>
+            <label class="consent-row">
+              <input type="checkbox" name="tcpa_consent" value="yes" required />
+              <span>I agree to be contacted by call, text, or email about health insurance options. Reply STOP to opt out.</span>
+            </label>
+            <input type="hidden" name="source" value="Public Website" />
+            <input
+              type="hidden"
+              name="consent_text"
+              value="I agree to be contacted by call, text, or email about health insurance options. Reply STOP to opt out."
+            />
+            <button class="primary-button" type="submit">Get My Quote</button>
+            <p class="form-note">No obligation. This is not a policy application or guarantee of eligibility, benefits, or rates.</p>
+          </form>
+        </div>
+      </section>
+
+      <section class="provider-strip" aria-label="Coverage comparison categories">
+        <div>
+          <p class="eyebrow">Compare plan paths</p>
+          <h2>Major coverage routes, one guided review.</h2>
+        </div>
+        <div class="provider-marquee" aria-label="Common health coverage paths">
+          <span>Private Health Plans</span>
+          <span>ACA Marketplace</span>
+          <span>PPO Options</span>
+          <span>Dental + Vision</span>
+          <span>Family Coverage</span>
+          <span>Self-Employed Plans</span>
+          <span>Supplemental Coverage</span>
+          <span>Short-Term Medical</span>
+        </div>
+      </section>
+
+      <section class="advisor-section" id="advisor">
+        <div class="advisor-card">
+          <img src="/assets/health-consultation-hero.png" alt="Health insurance consultation at a desk" />
+          <div class="advisor-card-footer">
+            <strong>Ariel Vahnish</strong>
+            <span>Health Solutions Advisor</span>
+          </div>
+        </div>
+        <div class="advisor-copy">
+          <p class="eyebrow">Meet your advisor</p>
+          <h2>One-on-one help, built for real health insurance decisions.</h2>
+          <p>
+            Ariel helps shoppers compare coverage without getting buried in plan jargon. The goal is simple: understand your timing, state, household, and coverage priorities before you choose a direction.
+          </p>
+          <div class="credential-grid">
+            <article>
+              <strong>Licensed guidance</strong>
+              <span>Support for qualifying states and coverage paths.</span>
+            </article>
+            <article>
+              <strong>Fast routing</strong>
+              <span>Qualified requests can move quickly to a focused plan review.</span>
+            </article>
+            <article>
+              <strong>Plain English</strong>
+              <span>Networks, deductibles, premiums, and out-of-pocket exposure explained clearly.</span>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="team-section">
+        <div class="section-heading centered">
+          <p class="eyebrow">Built like a team</p>
+          <h2>Support for every stage of the quote journey.</h2>
+        </div>
+        <div class="team-grid">
+          <article>
+            <span class="card-icon">01</span>
+            <h3>Intake Review</h3>
+            <p>Capture the basics once: state, household, timing, coverage goals, and preferred contact path.</p>
+          </article>
+          <article>
+            <span class="card-icon">02</span>
+            <h3>Plan Fit Check</h3>
+            <p>Compare private, marketplace, family, and supplemental routes without guessing blindly.</p>
+          </article>
+          <article>
+            <span class="card-icon">03</span>
+            <h3>Appointment Routing</h3>
+            <p>Qualified prospects are guided toward a focused plan conversation instead of endless back-and-forth.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="booking-section" id="booking">
+        <div>
+          <p class="eyebrow">Schedule a consultation</p>
+          <h2>Ready to talk through your options?</h2>
+          <p>
+            Start with the quote form, then book a convenient review once the intake confirms what kind of coverage route may fit.
+          </p>
+        </div>
+        <a class="primary-link" href="#quote">Start Free Consultation</a>
+      </section>
+
+      <section class="solutions-section" id="services">
+        <div class="section-heading centered">
+          <p class="eyebrow">Healthcare solutions for everyone</p>
+          <h2>Coverage options for individuals, families, and business owners.</h2>
+          <p>Each category has different tradeoffs. Ariel helps you understand which route is worth comparing first.</p>
+        </div>
+        <div class="solution-grid">
+          <article>
+            <h3>Individual + Family Plans</h3>
+            <p>Compare coverage for yourself, your spouse, children, or the whole household.</p>
+          </article>
+          <article>
+            <h3>Self-Employed Coverage</h3>
+            <p>Options for contractors, consultants, creators, real estate pros, and independent workers.</p>
+          </article>
+          <article>
+            <h3>ACA Marketplace Review</h3>
+            <p>Consider income, household, timing, and subsidy fit when marketplace plans may make sense.</p>
+          </article>
+          <article>
+            <h3>Private PPO Guidance</h3>
+            <p>Review network flexibility, underwriting considerations, and premium tradeoffs when available.</p>
+          </article>
+          <article>
+            <h3>Dental + Vision Add-Ons</h3>
+            <p>Layer in extra benefits when medical coverage alone is not enough.</p>
+          </article>
+          <article>
+            <h3>Supplemental Protection</h3>
+            <p>Discuss whether additional coverage could help reduce exposure for specific situations.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="why-section">
+        <div class="why-overlay" aria-hidden="true"></div>
+        <div class="why-copy">
+          <p class="eyebrow">Why work with Ariel?</p>
+          <h2>More clarity, less guesswork.</h2>
+          <p>
+            A guided review helps you compare more than the monthly premium. You can look at doctor access, deductibles, prescriptions, timing, and whether a plan actually fits how you use care.
+          </p>
+        </div>
+        <div class="why-grid">
+          <article>
+            <strong>All realistic routes</strong>
+            <span>Private, marketplace, family, supplemental, and self-employed options.</span>
+          </article>
+          <article>
+            <strong>Personal service</strong>
+            <span>A real advisor helps translate the details into a decision path.</span>
+          </article>
+          <article>
+            <strong>No-cost quote review</strong>
+            <span>Start with a free consultation and no obligation to enroll.</span>
+          </article>
+          <article>
+            <strong>Compliance-minded intake</strong>
+            <span>Consent, opt-out, and state-fit checks are built into the workflow.</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="plans-section">
+        <div class="section-heading centered">
+          <p class="eyebrow">Why choose a guided plan review?</p>
+          <h2>The cheapest plan is not always the better plan.</h2>
+        </div>
+        <div class="plan-feature-grid">
+          <article>
+            <h3>Network Fit</h3>
+            <p>Check whether the plan structure lines up with the providers you care about.</p>
+            <a href="#quote">Book Consultation →</a>
+          </article>
+          <article>
+            <h3>Cost Exposure</h3>
+            <p>Compare monthly premium, deductible, copays, and out-of-pocket maximums together.</p>
+            <a href="#quote">Book Consultation →</a>
+          </article>
+          <article>
+            <h3>Timing + Eligibility</h3>
+            <p>Understand enrollment timing and which coverage routes may be available now.</p>
+            <a href="#quote">Book Consultation →</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="newsletter-section" id="contact">
+        <div>
+          <p class="eyebrow">Stay informed</p>
+          <h2>Get health coverage reminders and quote help.</h2>
+          <p>Not ready to decide today? Send a quote request and Ariel's qualifier can help you figure out your next best step.</p>
+        </div>
+        <a class="secondary-link light" href="#quote">Send My Info</a>
+      </section>
+
+      <section class="reviews-section" id="reviews">
+        <div class="section-heading centered">
+          <p class="eyebrow">What clients want most</p>
+          <h2>Clear answers before choosing coverage.</h2>
+        </div>
+        <div class="review-grid">
+          <article>
+            <span class="quote-mark">"</span>
+            <p>The biggest relief was having the plan details explained in normal language before making a decision.</p>
+            <strong>Recent quote review</strong>
+            <span>Individual shopper</span>
+          </article>
+          <article>
+            <span class="quote-mark">"</span>
+            <p>I needed help comparing family options and understanding what the deductible actually meant for us.</p>
+            <strong>Recent quote review</strong>
+            <span>Family coverage shopper</span>
+          </article>
+          <article>
+            <span class="quote-mark">"</span>
+            <p>As self-employed, I did not know where to start. The intake made the next step much clearer.</p>
+            <strong>Recent quote review</strong>
+            <span>Independent worker</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="savings-story">
+        <div class="story-copy">
+          <p class="eyebrow">Smart comparison example</p>
+          <h2>Real savings come from comparing the whole plan.</h2>
+          <p>
+            A premium can look attractive while the deductible, network, or prescription details make the plan a poor fit. The review looks at the full picture.
+          </p>
+        </div>
+        <div class="before-after">
+          <article>
+            <span>Before</span>
+            <strong>Unknown tradeoffs</strong>
+            <p>Premium-first shopping with unclear network, deductible, and out-of-pocket exposure.</p>
+          </article>
+          <article>
+            <span>After</span>
+            <strong>Clear comparison</strong>
+            <p>Premium, benefits, timing, and care needs reviewed together before choosing a route.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="faq-section" id="faq">
+        <div class="section-heading centered">
+          <p class="eyebrow">Frequently asked questions</p>
+          <h2>Answers before you request a quote.</h2>
+        </div>
+        <div class="faq-grid">
+          <details>
+            <summary>Is this service really free?</summary>
+            <p>Yes. The quote request and initial consultation are free and have no obligation.</p>
+          </details>
+          <details>
+            <summary>Will you sell my information?</summary>
+            <p>Your request is used to follow up about health coverage options. You can opt out of text outreach by replying STOP.</p>
+          </details>
+          <details>
+            <summary>How quickly will I get a response?</summary>
+            <p>The qualifier is designed for fast follow-up, with timing depending on your request and contact availability.</p>
+          </details>
+          <details>
+            <summary>What if I already have insurance?</summary>
+            <p>You can still compare whether another route may fit your timing, budget, doctors, or household better.</p>
+          </details>
+          <details>
+            <summary>Can you help outside open enrollment?</summary>
+            <p>Possibly. Availability depends on your state, eligibility, timing, and whether private options fit your situation.</p>
+          </details>
+          <details>
+            <summary>Is this a policy application?</summary>
+            <p>No. This starts a quote review. Final eligibility, benefits, and rates depend on the plan and application details.</p>
+          </details>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div>
+        <strong>ArielHealthSolutions.com</strong>
+        <span>Independent health insurance guidance.</span>
+      </div>
+      <div class="footer-links">
+        <a href="#quote">Get Quote</a>
+        <a href="#services">Services</a>
+        <a href="#faq">FAQ</a>
+      </div>
+    </footer>
+
+    <a class="sticky-quote" href="#quote">Get My Quote</a>
+
+    <script src="/static/site.js"></script>
+  </body>
+</html>

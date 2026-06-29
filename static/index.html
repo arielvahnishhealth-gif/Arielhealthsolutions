@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Health Lead Bot</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Health Insurance Lead Bot</p>
+          <h1>Qualifier Pipeline</h1>
+        </div>
+        <nav class="top-actions" aria-label="Exports and materials">
+          <span class="status-pill muted-pill" id="lastUpdated">Loading</span>
+          <a class="icon-button" href="/quote" target="_blank" rel="noreferrer" title="Public Quote Page">FORM</a>
+          <a class="icon-button" href="/assets/qualifier_loom_script.pdf" title="Training PDF">PDF</a>
+          <a class="icon-button" href="/leads.csv" title="Export CSV">CSV</a>
+          <a class="icon-button" href="/leads/download.zip" title="Download ZIP">ZIP</a>
+          <a class="icon-button" href="/api/compliance/export.zip" title="Compliance Export">AUD</a>
+          <a class="icon-button" href="/api/backup.zip" title="Backup">BAK</a>
+          <a class="icon-button" href="/logout" title="Sign Out">OUT</a>
+        </nav>
+      </header>
+
+      <section class="kpi-grid" id="kpis" aria-label="Pipeline metrics"></section>
+
+      <section class="autopilot-panel" aria-label="Automation health">
+        <div class="panel-heading">
+          <div>
+            <h2>Autopilot</h2>
+            <p>Lead acquisition, booking, and manual follow-up health at a glance.</p>
+          </div>
+          <span class="status-pill" id="autopilotStatus">Checking</span>
+        </div>
+        <div class="automation-cards" id="automationCards"></div>
+        <div class="automation-priorities" id="automationPriorities"></div>
+      </section>
+
+      <section class="workspace">
+        <aside class="intake-panel">
+          <div class="panel-heading">
+            <h2>New Lead</h2>
+            <span class="status-pill" id="saveStatus">Ready</span>
+          </div>
+          <form id="leadForm" class="lead-form">
+            <label>
+              Name
+              <input name="name" required value="Jordan Taylor" />
+            </label>
+            <div class="form-pair">
+              <label>
+                Phone
+                <input name="phone" value="(813) 555-0184" />
+              </label>
+              <label>
+                Email
+                <input name="email" type="email" value="jordan@example.com" />
+              </label>
+            </div>
+            <div class="form-pair">
+              <label>
+                State
+                <input name="state" maxlength="2" value="FL" />
+              </label>
+              <label>
+                County
+                <input name="county" value="Hillsborough" />
+              </label>
+            </div>
+            <div class="form-pair">
+              <label>
+                Age
+                <input name="age" type="number" min="18" max="99" value="37" />
+              </label>
+              <label>
+                Income
+                <input name="annual_income" type="number" min="0" step="1000" value="72000" />
+              </label>
+            </div>
+            <div class="form-pair">
+              <label>
+                Household
+                <input name="household_size" type="number" min="1" max="12" value="2" />
+              </label>
+              <label>
+                Source
+                <select name="source">
+                  <option>Website Form</option>
+                  <option>COBRA / Job Loss</option>
+                  <option>Google Search</option>
+                  <option>HealthSherpa</option>
+                  <option>Layoff Signal</option>
+                  <option>Marketplace Shopper</option>
+                  <option>Meta Lead Ad</option>
+                  <option>Public Social Intent</option>
+                  <option>Referral Partner</option>
+                  <option>Retargeting Ad</option>
+                  <option>USHealth Group</option>
+                  <option>Yellow Pages</option>
+                </select>
+              </label>
+            </div>
+            <div class="toggle-row">
+              <label><input type="checkbox" name="healthy" checked /> Healthy</label>
+              <label><input type="checkbox" name="has_current_coverage" checked /> Covered</label>
+              <label><input type="checkbox" name="tcpa_consent" checked /> TCPA</label>
+            </div>
+            <label>
+              Intent
+              <textarea name="intent" rows="3">Comparing private PPO options and wants a quote this week.</textarea>
+            </label>
+            <input type="hidden" name="consent_text" value="I agree to be contacted about health insurance options." />
+            <button class="primary-button" type="submit">Add Lead</button>
+          </form>
+
+          <div class="mini-tool">
+            <h3>DNC Suppression</h3>
+            <form id="dncForm" class="compact-form">
+              <select name="kind">
+                <option value="phone">Phone</option>
+                <option value="email">Email</option>
+              </select>
+              <input name="value" placeholder="Value" />
+              <button type="submit">Block</button>
+            </form>
+          </div>
+
+          <div class="mini-tool">
+            <h3>Opt-Out</h3>
+            <form id="optOutForm" class="compact-form">
+              <select name="kind">
+                <option value="phone">Phone</option>
+                <option value="email">Email</option>
+              </select>
+              <input name="value" placeholder="STOP value" />
+              <button type="submit">Stop</button>
+            </form>
+          </div>
+        </aside>
+
+        <section class="lead-board">
+          <div class="board-header">
+            <div>
+              <h2>Leads</h2>
+              <p id="boardCaption">NEW to READY, with READY-only delivery.</p>
+            </div>
+            <div class="segmented" role="tablist" aria-label="Stage filter">
+              <button class="active" data-filter="ALL" type="button">All</button>
+              <button data-filter="NEW" type="button">New</button>
+              <button data-filter="TRIAGE" type="button">Triage</button>
+              <button data-filter="QUALIFIED" type="button">Qualified</button>
+              <button data-filter="READY" type="button">Ready</button>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Lead</th>
+                  <th>Segment</th>
+                  <th>Score</th>
+                  <th>Stage</th>
+                  <th>Owner</th>
+                  <th>Next Action</th>
+                </tr>
+              </thead>
+              <tbody id="leadRows"></tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+
+      <section class="lower-grid">
+        <div class="setup-panel">
+          <div class="panel-heading">
+            <h2>Setup</h2>
+            <span class="status-pill" id="setupProgress">Checking</span>
+          </div>
+          <div id="setupChecks" class="setup-checks"></div>
+          <div class="setup-actions">
+            <button type="button" id="runTestFlow">Test Run</button>
+            <button type="button" id="runQualifier">Run Qualifier</button>
+            <button type="button" id="runSetupAutopilot">Run Setup Bot</button>
+            <button type="button" id="runBotTeam">Run Bot Team</button>
+            <button type="button" id="runCalendlySync">Sync Calendly</button>
+            <button type="button" data-test-integration="calendly">Test Calendly</button>
+            <button type="button" data-test-integration="outreach">Manual Outreach</button>
+            <button type="button" data-test-integration="hubspot">Test HubSpot</button>
+          </div>
+        </div>
+        <div class="alerts-panel">
+          <div class="panel-heading">
+            <h2>Owner Alerts</h2>
+            <span class="status-pill" id="alertCount">0</span>
+          </div>
+          <div id="ownerAlerts" class="owner-alerts"></div>
+        </div>
+        <div class="thread-panel">
+          <div class="panel-heading">
+            <h2>Follow-up Thread</h2>
+            <span class="status-pill" id="threadLeadName">Select Lead</span>
+          </div>
+          <div id="threadMessages" class="thread-messages"></div>
+          <form id="threadForm" class="thread-form">
+            <select name="direction">
+              <option value="outbound">Qualifier</option>
+              <option value="inbound">Lead</option>
+              <option value="internal">Note</option>
+            </select>
+            <input name="body" placeholder="Add message or note..." autocomplete="off" />
+            <button type="submit">Add</button>
+          </form>
+          <div class="setup-actions">
+            <button type="button" id="markPhoneVerified">Verified</button>
+            <button type="button" id="markWrongNumber">Wrong #</button>
+          </div>
+        </div>
+        <div class="settings-panel">
+          <div class="panel-heading">
+            <h2>Automation</h2>
+            <button type="button" id="runOps">Run Ops</button>
+          </div>
+          <form id="settingsForm" class="settings-form"></form>
+        </div>
+        <div class="source-panel">
+          <div class="panel-heading">
+            <h2>Sources</h2>
+            <span class="status-pill">Quality</span>
+          </div>
+          <div id="sourceMetrics" class="source-metrics"></div>
+        </div>
+        <div class="ai-panel">
+          <div class="panel-heading">
+            <h2>AI Helper</h2>
+            <span class="status-pill" id="aiProvider">Local</span>
+          </div>
+          <div id="aiMessages" class="ai-messages">
+            <div class="ai-message assistant">Ask me how to fix, improve, automate, or operate this lead bot.</div>
+          </div>
+          <form id="aiForm" class="ai-form">
+            <input name="message" placeholder="Ask the AI helper..." autocomplete="off" />
+            <button type="submit">Ask</button>
+          </form>
+        </div>
+        <div class="flow-panel">
+          <div class="panel-heading">
+            <h2>Flow</h2>
+            <a href="/assets/lead_pipeline_flow.png">Open</a>
+          </div>
+          <img src="/assets/lead_pipeline_flow.png" alt="Lead pipeline flow" />
+        </div>
+        <div class="activity-panel">
+          <div class="tabs">
+            <button class="active" data-tab="deliveries" type="button">Deliveries</button>
+            <button data-tab="audit" type="button">Audit</button>
+          </div>
+          <div id="activityFeed" class="activity-feed"></div>
+        </div>
+      </section>
+    </main>
+
+    <dialog id="actionDialog">
+      <form method="dialog" id="actionForm">
+        <h2 id="dialogTitle">Lead Action</h2>
+        <input type="hidden" name="lead_id" />
+        <input type="hidden" name="action" />
+        <div id="dialogFields"></div>
+        <menu>
+          <button value="cancel" type="button" id="cancelDialog">Cancel</button>
+          <button value="submit" class="primary-button">Save</button>
+        </menu>
+      </form>
+    </dialog>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>

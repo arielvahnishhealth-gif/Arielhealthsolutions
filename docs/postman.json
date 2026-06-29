@@ -1,0 +1,4 @@
+{
+  "info": { "name": "Health-Leads-Bot" },
+  "item": [ { "name": "GET /health", "request": { "method": "GET", "url": "http://localhost:8080/health" } } ]
+}

@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Qualify Lead</title>
+    <style>
+      body {
+        color: #172033;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        margin: 16px;
+        max-width: 760px;
+      }
+
+      fieldset {
+        border: 1px solid #d8dee8;
+        border-radius: 8px;
+        margin-bottom: 16px;
+        padding: 14px;
+      }
+
+      legend {
+        font-weight: 800;
+      }
+
+      label {
+        color: #5c687a;
+        display: block;
+        font-size: 0.82rem;
+        font-weight: 750;
+        margin: 6px 0 2px;
+      }
+
+      input[type="text"],
+      input[type="date"],
+      input[type="number"] {
+        border: 1px solid #c8d0dc;
+        border-radius: 6px;
+        min-height: 38px;
+        padding: 8px;
+        width: 100%;
+      }
+
+      .row {
+        display: flex;
+        gap: 8px;
+      }
+
+      .row > div {
+        flex: 1;
+      }
+
+      button {
+        background: #0b69ff;
+        border: 0;
+        border-radius: 8px;
+        color: #fff;
+        font-weight: 800;
+        min-height: 44px;
+        padding: 12px 18px;
+      }
+
+      .note {
+        color: #667386;
+        font-size: 0.86rem;
+      }
+
+      @media (max-width: 700px) {
+        .row {
+          display: block;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Qualifying Sheet</h2>
+    <p class="note">
+      Only collect what is needed to estimate eligibility and rates. No diagnosis or medication names.
+      By submitting, the prospect consents to be contacted about insurance options.
+    </p>
+
+    <form id="f">
+      <input type="hidden" id="lead_id" value="{{ lead_id }}" />
+
+      <div class="row">
+        <div>
+          <label for="name">Name</label>
+          <input type="text" id="name" />
+        </div>
+        <div>
+          <label for="zip">ZIP</label>
+          <input type="text" id="zip" maxlength="10" />
+        </div>
+      </div>
+
+      <fieldset>
+        <legend>Primary</legend>
+        <div class="row">
+          <div>
+            <label for="p_dob">DOB</label>
+            <input type="date" id="p_dob" />
+          </div>
+          <div>
+            <label for="p_h">Height (in)</label>
+            <input type="number" id="p_h" />
+          </div>
+          <div>
+            <label for="p_w">Weight (lb)</label>
+            <input type="number" id="p_w" />
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <label for="p_sm">Smoker (Y/N)</label>
+            <input type="text" id="p_sm" />
+          </div>
+          <div>
+            <label for="p_hbp">HBP/HC (Y/N)</label>
+            <input type="text" id="p_hbp" />
+          </div>
+          <div>
+            <label for="p_m">Meds (Y/N)</label>
+            <input type="text" id="p_m" />
+          </div>
+          <div>
+            <label for="p_s">Surgeries (Y/N)</label>
+            <input type="text" id="p_s" />
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Spouse</legend>
+        <div class="row">
+          <div>
+            <label for="s_dob">DOB</label>
+            <input type="date" id="s_dob" />
+          </div>
+          <div>
+            <label for="s_h">Height (in)</label>
+            <input type="number" id="s_h" />
+          </div>
+          <div>
+            <label for="s_w">Weight (lb)</label>
+            <input type="number" id="s_w" />
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <label for="s_sm">Smoker</label>
+            <input type="text" id="s_sm" />
+          </div>
+          <div>
+            <label for="s_hbp">HBP/HC</label>
+            <input type="text" id="s_hbp" />
+          </div>
+          <div>
+            <label for="s_m">Meds</label>
+            <input type="text" id="s_m" />
+          </div>
+          <div>
+            <label for="s_s">Surgeries</label>
+            <input type="text" id="s_s" />
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Children</legend>
+        <div class="row">
+          <div>
+            <label for="c1_dob">Child 1 DOB</label>
+            <input type="date" id="c1_dob" />
+          </div>
+          <div>
+            <label for="c2_dob">Child 2 DOB</label>
+            <input type="date" id="c2_dob" />
+          </div>
+          <div>
+            <label for="c3_dob">Child 3 DOB</label>
+            <input type="date" id="c3_dob" />
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Plan Notes</legend>
+        <div class="row">
+          <div>
+            <label for="income">Income</label>
+            <input type="text" id="income" />
+          </div>
+          <div>
+            <label for="start">Start Date</label>
+            <input type="text" id="start" />
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <label for="carrier">Carrier</label>
+            <input type="text" id="carrier" />
+          </div>
+          <div>
+            <label for="rate">Rate</label>
+            <input type="text" id="rate" />
+          </div>
+        </div>
+        <label for="notes">Notes</label>
+        <input type="text" id="notes" />
+      </fieldset>
+
+      <button type="submit">Submit</button>
+    </form>
+
+    <script>
+      function yn(value) {
+        const text = (value || "").toLowerCase();
+        if (text.startsWith("y")) return true;
+        if (text.startsWith("n")) return false;
+        return null;
+      }
+
+      function person(prefix) {
+        return {
+          dob: document.getElementById(`${prefix}_dob`).value || null,
+          height_in: document.getElementById(`${prefix}_h`)?.value
+            ? parseInt(document.getElementById(`${prefix}_h`).value, 10)
+            : null,
+          weight_lb: document.getElementById(`${prefix}_w`)?.value
+            ? parseInt(document.getElementById(`${prefix}_w`).value, 10)
+            : null,
+          smoker: yn(document.getElementById(`${prefix}_sm`)?.value),
+          hbp_hc: yn(document.getElementById(`${prefix}_hbp`)?.value),
+          meds: yn(document.getElementById(`${prefix}_m`)?.value),
+          surgeries: yn(document.getElementById(`${prefix}_s`)?.value),
+        };
+      }
+
+      document.getElementById("f").addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const leadId = document.getElementById("lead_id").value;
+        const payload = {
+          name: document.getElementById("name").value || null,
+          zip: document.getElementById("zip").value || null,
+          primary: person("p"),
+          spouse: person("s"),
+          child1: { dob: document.getElementById("c1_dob").value || null },
+          child2: { dob: document.getElementById("c2_dob").value || null },
+          child3: { dob: document.getElementById("c3_dob").value || null },
+          income: document.getElementById("income").value || null,
+          start_date: document.getElementById("start").value || null,
+          carrier: document.getElementById("carrier").value || null,
+          rate: document.getElementById("rate").value || null,
+          notes: document.getElementById("notes").value || null,
+        };
+        const response = await fetch(`/qualify/${leadId}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+        alert(response.ok ? "Saved" : "Error");
+      });
+    </script>
+  </body>
+</html>

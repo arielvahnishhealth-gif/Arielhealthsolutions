@@ -1,0 +1,40 @@
+version: "3.9"
+
+services:
+  api:
+    build: .
+    env_file: .env
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+      - redis
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8080
+
+  worker:
+    build: .
+    env_file: .env
+    depends_on:
+      - db
+      - redis
+    command: rq worker -u ${REDIS_URL} lead_queue
+
+  scheduler:
+    build: .
+    env_file: .env
+    depends_on:
+      - api
+    command: python -u app/scheduler.py
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: leads
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
